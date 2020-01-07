@@ -40,7 +40,7 @@ router.get('/video', (req, res) => {
             console.log('Error in Retriving Videos :' + JSON.stringify(err, undefined, 2)
             );
         }
-    }); 
+    });
 });
 
 router.get('/videos_album', (req, res) => {
