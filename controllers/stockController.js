@@ -118,7 +118,7 @@ router.put('/stock', (req, res) => {
     }, (err, doc) => {
         if (!err) {
             res
-                .status(HttpStatus.OK)
+                .status(HttpStatus.CREATED)
                 .send(doc);
         } else {
             res
@@ -126,7 +126,7 @@ router.put('/stock', (req, res) => {
                 .send({
                     err: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR)
                 });
-            console.log('Error in Edit Testcrud :' + JSON.stringify(err, undefined, 2));
+            console.log('Error in Edit updateStock :' + JSON.stringify(err, undefined, 2));
         }
     });
 });
