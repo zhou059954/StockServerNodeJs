@@ -67,7 +67,7 @@ router.post('/stock', (req, res) => {
 });
 
 router.put('/stock', (req, res) => {
-    var stock_id = req.param('_id');
+    var stock_id = req.param('id');
     if (!ObjectId.isValid(stock_id))
         return res.status(HttpStatus.OK)
             .send(stock_id);
