@@ -78,7 +78,7 @@ router.put('/stock', (req, res) => {
     // var stocktotal = req.param('stockplus');
     var stock_id = req.param('id');
     if (!ObjectId.isValid(stock_id))
-        return res.status(HttpStatus.OK).send("mandea :"+stock_id)
+        return res.status(HttpStatus.OK).send(`mandea : ${stock_id}`)
             .send(stock_id);
 
     /*  var datys = Date.now();
