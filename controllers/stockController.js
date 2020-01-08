@@ -75,6 +75,7 @@ router.post('/stock', (req, res) => {
 });
 
 router.put('/stock', (req, res) => {
+    var stocktotal = req.param('stockplus');
     var stock_id = req.param('id');
     if (!ObjectId.isValid(stock_id))
         return res.status(HttpStatus.OK)
@@ -87,12 +88,12 @@ router.put('/stock', (req, res) => {
         plus: pluss
     });
 
-    var stocktotal = req.body.total + pluss;
+    var totalStock = stocktotal + pluss;
 
     var stock = new Stocks({
         image: req.body.image,
         nom: req.body.nom,
-        total: stocktotal
+        total: totalStock
     });
 
     plusStock.save((err, doc) => {
