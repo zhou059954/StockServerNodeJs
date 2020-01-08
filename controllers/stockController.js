@@ -66,6 +66,7 @@ router.post('/stock', (req, res) => {
         total: stocktotal
     });
 
+    
     plusStock.save((err, doc) => {
         if (!err) {
             res
