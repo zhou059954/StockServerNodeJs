@@ -45,7 +45,7 @@ router.get('/stock', (req, res) => {
 
 
 router.post('/stock', (req, res) => {
-    var stocktotal = req.body.total;
+    var stocktotal = req.body.total - 20;
     var stock = new Stocks({
         image: req.body.image,
         nom: req.body.nom,
