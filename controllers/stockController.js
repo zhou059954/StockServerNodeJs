@@ -75,13 +75,13 @@ router.post('/stock', (req, res) => {
 });
 
 router.put('/stock', (req, res) => {
-    var stocktotal = req.param('stockplus');
+    // var stocktotal = req.param('stockplus');
     var stock_id = req.param('id');
     if (!ObjectId.isValid(stock_id))
         return res.status(HttpStatus.OK)
             .send(stock_id);
 
-    var datys = Date.now();
+    /*  var datys = Date.now();
     var pluss = req.body.plus;
     var plusStock = new StockPlus({
         daty: datys,
@@ -89,27 +89,27 @@ router.put('/stock', (req, res) => {
     });
 
     var totalStock = stocktotal + pluss;
-
+*/
     var stock = new Stocks({
         image: req.body.image,
         nom: req.body.nom,
-        total: totalStock
+        total: req.body.total
     });
 
-    plusStock.save((err, doc) => {
-        if (!err) {
-            res
-                .status(HttpStatus.CREATED)
-                .send(doc);
-        } else {
-            res
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .send({
-                    err: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR)
-                });
-            console.log('Error in Save Plus stock :' + JSON.stringify(err, undefined, 2));
-        }
-    });
+    /*   plusStock.save((err, doc) => {
+           if (!err) {
+               res
+                   .status(HttpStatus.CREATED)
+                   .send(doc);
+           } else {
+               res
+                   .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                   .send({
+                       err: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR)
+                   });
+               console.log('Error in Save Plus stock :' + JSON.stringify(err, undefined, 2));
+           }
+       });*/
 
     Stocks.findByIdAndUpdate(stock_id, {
         $set: stock
