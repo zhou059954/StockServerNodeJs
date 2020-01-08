@@ -85,11 +85,11 @@ router.put('/stock', (req, res) => {
         return res.status(HttpStatus.OK).send(`mandea : ${stocktotal}`)
             .send(stocktotal);
     var datys = Date.now();
-    var pluss = req.body.plus;
-    var plusStock = new StockPlus({
-        daty: datys,
-        plus: pluss
-    });
+    var pluss = req.body.total;
+    /*  var plusStock = new StockPlus({
+          daty: datys,
+          plus: pluss
+      });*/
 
     var totalStock = stocktotal + pluss;
 
@@ -99,7 +99,7 @@ router.put('/stock', (req, res) => {
         total: totalStock
     };
 
-    plusStock.save((err, doc) => {
+    /*plusStock.save((err, doc) => {
         if (!err) {
             res
                 .status(HttpStatus.CREATED)
@@ -112,7 +112,7 @@ router.put('/stock', (req, res) => {
                 });
             console.log('Error in Save Plus stock :' + JSON.stringify(err, undefined, 2));
         }
-    });
+    });*/
 
     Stocks.findByIdAndUpdate(stock_id, {
         $set: stock
