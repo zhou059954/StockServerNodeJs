@@ -4,6 +4,12 @@ var HttpStatus = require('http-status-codes');
 var {
     Stocks
 } = require('../models/stock');
+
+var {
+    StockPlus
+} = require('../models/stockPlus');
+
+
 var ObjectId = require('mongoose').Types.ObjectId;
 
 
@@ -45,12 +51,38 @@ router.get('/stock', (req, res) => {
 
 
 router.post('/stock', (req, res) => {
-    var stocktotal = req.body.total - 20;
+    var daty = Date.now();
+    var plus = req.body.plus;
+    var plus = new StockPlus({
+        daty: daty,
+        plus: plus
+    });
+
+    var stocktotal = req.body.total + plus;
+
+
+
     var stock = new Stocks({
         image: req.body.image,
         nom: req.body.nom,
         total: stocktotal
     });
+
+    plus.save((err, doc) => {
+        if (!err) {
+            res
+                .status(HttpStatus.CREATED)
+                .send(doc);
+        } else {
+            res
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .send({
+                    err: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR)
+                });
+            console.log('Error in Save Testcrud :' + JSON.stringify(err, undefined, 2));
+        }
+    });
+
     stock.save((err, doc) => {
         if (!err) {
             res
