@@ -90,32 +90,28 @@ router.put('/stock', (req, res) => {
 
     var totalStock = stocktotal + pluss;
 */
-    var stock = new Stocks({
+    var stock = {
         image: req.body.image,
         nom: req.body.nom,
-        total: req.body.nom
-    });
+        total: req.body.total
+    };
 
-    /* plusStock.save((err, doc) => {
-         if (!err) {
-             res
-                 .status(HttpStatus.CREATED)
-                 .send(doc);
-         } else {
-             res
-                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                 .send({
-                     err: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR)
-                 });
-             console.log('Error in Save Plus stock :' + JSON.stringify(err, undefined, 2));
-         }
-     });*/
+    /*   plusStock.save((err, doc) => {
+           if (!err) {
+               res
+                   .status(HttpStatus.CREATED)
+                   .send(doc);
+           } else {
+               res
+                   .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                   .send({
+                       err: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR)
+                   });
+               console.log('Error in Save Plus stock :' + JSON.stringify(err, undefined, 2));
+           }
+       });*/
 
-    Stocks.findByIdAndUpdate(stock_id, {
-        $set: stock
-    }, {
-        new: true
-    }, (err, doc) => {
+    Stocks.findByIdAndUpdate(stock_id, {$set: stock}, {new: true}, (err, doc) => {
         if (!err) {
             res
                 .status(HttpStatus.OK)
