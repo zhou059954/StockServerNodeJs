@@ -6,4 +6,4 @@ var Stocks = mongoose.model('stocks', {
     total: { type: Number }
 });
 
-module.exports = { Albums };
+module.exports = { Stocks };
