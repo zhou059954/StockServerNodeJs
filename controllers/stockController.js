@@ -78,7 +78,7 @@ router.put('/stock', (req, res) => {
         total: req.body.total
     });
 
-    Stocks.findById(stock_id, {
+    Stocks.findByIdAndUpdate(stock_id, {
         $set: stock
     }, {
         new: true
