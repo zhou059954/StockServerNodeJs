@@ -5,12 +5,7 @@ const {
   mongoose
 } = require('./db.js');
 
-var testcrudController = require('./controllers/testcrudController.js');
 var utilisateurController = require('./controllers/utilisateurController.js');
-var videosController = require('./controllers/videosController.js');
-var albumsController = require('./controllers/albumsController.js');
-var playlistController = require('./controllers/playlistsController.js');
-var newplaylistController = require('./controllers/newplaylistController.js');
 var stocksController = require('./controllers/stockController.js');
 
 var app = express();
@@ -35,11 +30,5 @@ app.use((req, res, next) => {
 });
 
 app.use('/', utilisateurController);
-app.use('/', testcrudController);
-app.use('/', videosController);
-app.use('/', albumsController);
-app.use('/', playlistController);
-app.use('/', newplaylistController);
 app.use('/', stocksController);
-app.use('/uploads/videos', express.static('uploads/videos'));
 app.use('/uploads/images', express.static('uploads/images'));
