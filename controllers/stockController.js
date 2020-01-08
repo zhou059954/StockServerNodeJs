@@ -78,7 +78,7 @@ router.put('/stock', (req, res) => {
     // var stocktotal = req.param('stockplus');
     var stock_id = req.param('id');
     if (!ObjectId.isValid(stock_id))
-        return res.status(HttpStatus.ACCEPTED)
+        return res.status(HttpStatus.OK).send("mandea :"+stock_id)
             .send(stock_id);
 
     /*  var datys = Date.now();
@@ -90,11 +90,11 @@ router.put('/stock', (req, res) => {
 
     var totalStock = stocktotal + pluss;
 */
-    var stock = new Stocks({
+    var stock = {
         image: req.body.image,
         nom: req.body.nom,
         total: req.body.total
-    });
+    };
 
     /*   plusStock.save((err, doc) => {
            if (!err) {
@@ -111,14 +111,10 @@ router.put('/stock', (req, res) => {
            }
        });*/
 
-    Stocks.findByIdAndUpdate(stock_id, {
-        $set: stock
-    }, {
-        new: true
-    }, (err, doc) => {
+    Stocks.findByIdAndUpdate(stock_id, {$set: stock}, {new: true}, (err, doc) => {
         if (!err) {
             res
-                .status(HttpStatus.CREATED)
+                .status(HttpStatus.OK)
                 .send(doc);
         } else {
             res
