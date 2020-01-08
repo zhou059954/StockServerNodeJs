@@ -45,10 +45,11 @@ router.get('/stock', (req, res) => {
 
 
 router.post('/stock', (req, res) => {
+    var stocktotal = req.body.total;
     var stock = new Stocks({
         image: req.body.image,
         nom: req.body.nom,
-        total: req.body.total
+        total: stocktotal
     });
     stock.save((err, doc) => {
         if (!err) {
