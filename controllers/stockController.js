@@ -51,13 +51,13 @@ router.get('/stock', (req, res) => {
 
 
 router.post('/stock', (req, res) => {
-    var daty = Date.now();
+    /*var daty = Date.now();
     var plus = req.body.plus;
     var plus = new StockPlus({
         daty: daty,
         plus: plus
     });
-
+*/
     var stocktotal = req.body.total + plus;
 
 
@@ -68,7 +68,7 @@ router.post('/stock', (req, res) => {
         total: stocktotal
     });
 
-    plus.save((err, doc) => {
+    /*plus.save((err, doc) => {
         if (!err) {
             res
                 .status(HttpStatus.CREATED)
@@ -81,7 +81,7 @@ router.post('/stock', (req, res) => {
                 });
             console.log('Error in Save Testcrud :' + JSON.stringify(err, undefined, 2));
         }
-    });
+    });*/
 
     stock.save((err, doc) => {
         if (!err) {
