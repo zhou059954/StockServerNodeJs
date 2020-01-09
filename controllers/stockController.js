@@ -123,6 +123,8 @@ router.put('/stock', (req, res) => {
             PU: req.body.PU,
             quantite: quantiteTotal
         };
+    } else {
+        res.status(HttpStatus.CONFLICT);
     }
     /*   plusStock.save((err, doc) => {
            if (!err) {
