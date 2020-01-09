@@ -40,8 +40,8 @@ router.get('/stocks', (req, res) => {
         }*/
         "$group": {
             "_id": { "checkType": "$_id.checkType", "resultCode": "$_id.resultCode" },
-            "image": { "$push": "$$ROOT" },
-            "nom": { "$push": "$$ROOT" },
+            "image": "$image",
+            "nom": "$nom",
             "total": { "$sum": "$total" },
             "PU": { "$sum": "$PU" }
         } },
