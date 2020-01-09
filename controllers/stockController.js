@@ -40,12 +40,14 @@ router.get('/stocks', (req, res) => {
         }*/
         "$group": {
             "_id": { "checkType": "$_id.checkType", "resultCode": "$_id.resultCode" },
-            "image": "$image",
-            "nom": "$nom",
+            "image": { "$sum": "$image" },
+            "nom": { "$sum": "$nom" },
             "total": { "$sum": "$total" },
             "PU": { "$sum": "$PU" }
         } },
         { "$project": {
+            "image":1,
+            "nom":1,
             "total": 1,
             "PU": 1,
             "PT": { "$multiply": [ "$PU","$total" ] },
