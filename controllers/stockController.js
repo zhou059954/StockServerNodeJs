@@ -44,9 +44,7 @@ router.get('/stocks', (req, res) => {
             }
         },
         {
-            "$project": {
-                "total": 1,
-                "PU": 1,
+            "$addFields": {
                 "PT": {
                     $multiply: ["$PU", "$total"]
                 }
