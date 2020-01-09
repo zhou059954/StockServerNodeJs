@@ -114,8 +114,8 @@ router.put('/stock', (req, res) => {
         return res.status(HttpStatus.OK).send(`mandea : ${stock_id}`)
             .send(stock_id);
 
-            var quantiteS =req.body.quantite;
-            var quantiteTotal=quantiteS + stockquantite;
+    var quantiteS = req.body.quantite;
+    var quantiteTotal = (quantiteS * 1) + (stockquantite * 1);
     var stock = {
         image: req.body.image,
         nom: req.body.nom,
