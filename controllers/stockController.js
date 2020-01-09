@@ -13,8 +13,43 @@ var {
 var ObjectId = require('mongoose').Types.ObjectId;
 
 
-router.get('/stocks', (req, res) => {
+/*router.get('/stocks', (req, res) => {
     Stocks.find((err, docs) => {
+        if (!err) {
+            res.status(HttpStatus.OK).send(docs);
+        } else {
+            res
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .send({
+                    err: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR)
+                });
+            console.log('Error in Retriving Testcrud :' + JSON.stringify(err, undefined, 2));
+        }
+    });
+});*/
+
+
+router.get('/stocks', (req, res) => {
+    Stocks.aggregate([{
+        $project: {
+            image: {
+                $sum: "$image"
+            },
+            nom: {
+                $sum: "$nom"
+            },
+            total: {
+                $sum: "$total"
+            },
+            PU: {
+                $sum: "$PU"
+            },
+            PT: {
+                $sum: ["$PU", "$total"]
+            }
+        }
+    }], (err, docs) => {
+
         if (!err) {
             res.status(HttpStatus.OK).send(docs);
         } else {
