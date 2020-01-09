@@ -38,8 +38,10 @@ router.get('/stocks', (req, res) => {
             total: "$total",
             PU: "$PU",
             PT: {
-                $sum: ["$PU", "$total"]
-            }
+                $sum: {
+                    $multiply: ["$PU", "$total"]
+                }
+            },
         }
     }], (err, docs) => {
 
