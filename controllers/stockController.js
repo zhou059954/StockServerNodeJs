@@ -41,11 +41,6 @@ router.get('/stocks', (req, res) => {
             PU: {
                 $sum: "$PU"
             },
-            PT: {
-                $sum: {
-                    $multiply: ["$PU", "$quantite"]
-                }
-            }
         }
     }], (err, docs) => {
 
