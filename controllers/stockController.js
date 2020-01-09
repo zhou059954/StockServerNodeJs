@@ -33,16 +33,16 @@ router.get('/stocks', (req, res) => {
     Stocks.aggregate([{
         $project: {
             image: {
-                $sum: "$image"
+                $image
             },
             nom: {
-                $sum: "$nom"
+                $nom
             },
             total: {
-                $sum: "$total"
+                $total
             },
             PU: {
-                $sum: "$PU"
+                $PU
             },
             PT: {
                 $sum: ["$PU", "$total"]
