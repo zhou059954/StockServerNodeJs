@@ -30,17 +30,20 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 
 router.get('/stocks', (req, res) => {
-    Stocks.aggregate([{$match: {}},{
+    Stocks.aggregate([{
+        $match: {}
+    }, {
         $project: {
             _id: '$_id',
             image: '$image',
             nom: '$nom',
-            quantite:  { $sum: { $multiply: [ "$PU", "$quantite" ] } },
+            quantite: "$quantite",
             PU: "$PU",
-           /* PT: {
-                "$multiply" : "[" +"$PU" +","+ "$quantite"+ "]"
-            }*/
-
+            PT: {
+                $sum: {
+                    $multiply: ["$PU", "$quantite"]
+                }
+            }
         }
     }], (err, docs) => {
 
