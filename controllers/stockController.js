@@ -108,26 +108,19 @@ router.post('/stock', (req, res) => {
 });
 
 router.put('/stock', (req, res) => {
-    // var stockquantite = req.param('stockplus');
+    var stockquantite = req.param('stockplus');
     var stock_id = req.param('id');
     if (!ObjectId.isValid(stock_id))
         return res.status(HttpStatus.OK).send(`mandea : ${stock_id}`)
             .send(stock_id);
 
-    /*  var datys = Date.now();
-    var pluss = req.body.plus;
-    var plusStock = new StockPlus({
-        daty: datys,
-        plus: pluss
-    });
-
-    var quantiteStock = stockquantite + pluss;
-*/
+            var quantiteS =req.body.quantite;
+            var quantiteTotal=quantiteS + stockquantite;
     var stock = {
         image: req.body.image,
         nom: req.body.nom,
         PU: req.body.PU,
-        quantite: req.body.quantite
+        quantite: quantiteTotal
     };
 
     /*   plusStock.save((err, doc) => {
