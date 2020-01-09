@@ -31,7 +31,7 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 router.get('/stocks', (req, res) => {
     Stocks.aggregate([{
-        $project: {
+        $addFields: {
             _id: "$_id",
             image: "$image",
             nom: "$nom",
@@ -41,9 +41,6 @@ router.get('/stocks', (req, res) => {
                 $sum: {
                     $multiply: ["$PU", "$total"]
                 }
-            },
-            count: {
-                $sum: 1
             }
         }
     }], (err, docs) => {
