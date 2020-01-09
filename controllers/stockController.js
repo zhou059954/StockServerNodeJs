@@ -116,13 +116,14 @@ router.put('/stock', (req, res) => {
 
     var quantiteS = req.body.quantite;
     var quantiteTotal = (quantiteS * 1) + (stockquantite * 1);
-    var stock = {
-        image: req.body.image,
-        nom: req.body.nom,
-        PU: req.body.PU,
-        quantite: quantiteTotal
-    };
-
+    if (quantiteTotal > 0) {
+        var stock = {
+            image: req.body.image,
+            nom: req.body.nom,
+            PU: req.body.PU,
+            quantite: quantiteTotal
+        };
+    }
     /*   plusStock.save((err, doc) => {
            if (!err) {
                res
