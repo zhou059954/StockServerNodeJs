@@ -46,8 +46,6 @@ router.get('/stocks', (req, res) => {
             "PU": { "$sum": "$PU" }
         } },
         { "$project": {
-            "image":1,
-            "nom":1,
             "total": 1,
             "PU": 1,
             "PT": { "$multiply": [ "$PU","$total" ] },
