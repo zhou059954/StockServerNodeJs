@@ -55,7 +55,8 @@ router.post('/stock', (req, res) => {
     var stock = new Stocks({
         image: req.body.image,
         nom: req.body.nom,
-        total: req.body.nom
+        PU: req.body.PU,
+        total: req.body.total
     });
 
     stock.save((err, doc) => {
@@ -93,6 +94,7 @@ router.put('/stock', (req, res) => {
     var stock = {
         image: req.body.image,
         nom: req.body.nom,
+        PU: req.body.PU,
         total: req.body.total
     };
 
@@ -111,7 +113,11 @@ router.put('/stock', (req, res) => {
            }
        });*/
 
-    Stocks.findByIdAndUpdate(stock_id, {$set: stock}, {new: true}, (err, doc) => {
+    Stocks.findByIdAndUpdate(stock_id, {
+        $set: stock
+    }, {
+        new: true
+    }, (err, doc) => {
         if (!err) {
             res
                 .status(HttpStatus.OK)
