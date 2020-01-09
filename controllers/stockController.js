@@ -31,27 +31,18 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 router.get('/stocks', (req, res) => {
     Stocks.aggregate([{
-      /*  $addFields: {
+        $addFields: {
             _id: "$_id",
             image: "$image",
             nom: "$nom",
-            total: "$total",
-            PU: "$PU"
-        }*/
-        "$group": {
-            "_id": { "checkType": "$_id.checkType", "resultCode": "$_id.resultCode" },
-            "image": { "$sum": "$image" },
-            "nom": { "$sum": "$nom" },
-            "total": { "$sum": "$total" },
-            "PU": { "$sum": "$PU" }
-        } },
-        { "$project": {
-            "image":1,
-            "nom":1,
-            "total": 1,
-            "PU": 1,
-            "PT": { "$multiply": [ "$PU","$total" ] },
-        } 
+            quantite: "$quantite",
+            PU: "$PU",
+            PT: {
+                $sum: {
+                    $multiply: ["$PU", "$quantite"]
+                }
+            }
+        }
     }], (err, docs) => {
 
         if (!err) {
@@ -95,7 +86,7 @@ router.post('/stock', (req, res) => {
         image: req.body.image,
         nom: req.body.nom,
         PU: req.body.PU,
-        total: req.body.total
+        quantite: req.body.quantite
     });
 
     stock.save((err, doc) => {
@@ -115,7 +106,7 @@ router.post('/stock', (req, res) => {
 });
 
 router.put('/stock', (req, res) => {
-    // var stocktotal = req.param('stockplus');
+    // var stockquantite = req.param('stockplus');
     var stock_id = req.param('id');
     if (!ObjectId.isValid(stock_id))
         return res.status(HttpStatus.OK).send(`mandea : ${stock_id}`)
@@ -128,13 +119,13 @@ router.put('/stock', (req, res) => {
         plus: pluss
     });
 
-    var totalStock = stocktotal + pluss;
+    var quantiteStock = stockquantite + pluss;
 */
     var stock = {
         image: req.body.image,
         nom: req.body.nom,
         PU: req.body.PU,
-        total: req.body.total
+        quantite: req.body.quantite
     };
 
     /*   plusStock.save((err, doc) => {
