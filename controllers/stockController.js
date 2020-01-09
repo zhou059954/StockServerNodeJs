@@ -40,7 +40,7 @@ router.get('/stocks', (req, res) => {
             },
             PU: "$PU",
             PT: {
-                "$multiply": ["$PU", "$quantite"]
+                "$multiply": "[" +"$PU" +","+ "$quantite"+ "]"
             }
 
         }
