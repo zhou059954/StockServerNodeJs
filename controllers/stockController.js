@@ -31,24 +31,28 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 router.get('/stocks', (req, res) => {
     Stocks.aggregate([{
-        "$group": {
-            "_id": "$_id",
-            "image": "$image",
-            "nom": "$nom",
-            "total": "$total",
-            "PU": "$PU"
-        } ,
-        "$project": {
-            "_id": "$_id",
-            "image": "$image",
-            "nom": "$nom",
-            "total": "$total",
-            "PU": "$PU",
-            "PT": {
-                $multiply: ["$PU", "$total"]
+            "$group": {
+                "_id": "$_id",
+                "image": "$image",
+                "nom": "$nom",
+                "total": {
+                    "$sum": "$total"
+                },
+                "PU": {
+                    "$sum": "$PU"
+                },
+            }
+        },
+        {
+            "$project": {
+                "total": 1,
+                "PU": 1,
+                "PT": {
+                    $multiply: ["$PU", "$total"]
+                }
             }
         }
-    }], (err, docs) => {
+    ], (err, docs) => {
 
         if (!err) {
             res.status(HttpStatus.OK).send(docs);
